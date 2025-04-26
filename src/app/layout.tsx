@@ -2,6 +2,7 @@ import { geistMono, geistSans } from '@/app/typography';
 import '@/cssfiles/globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
+import QueryProvider from './providers';
 
 export default async function RootLayout({
   children,
@@ -12,7 +13,9 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <QueryProvider>
+          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        </QueryProvider>
       </body>
     </html>
   );
