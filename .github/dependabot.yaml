@@ -1,0 +1,23 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    open-pull-requests-limit: 5
+    rebase-strategy: 'auto'
+    groups:
+      production-dependencies:
+        patterns:
+          - '*'
+        exclude-patterns:
+          - 'eslint*'
+          - 'vitest'
+          - 'typescript'
+          - '@types/*'
+      dev-dependencies:
+        patterns:
+          - 'eslint*'
+          - 'vitest'
+          - 'typescript'
+          - '@types/*'
