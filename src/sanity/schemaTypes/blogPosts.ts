@@ -59,5 +59,19 @@ export const blogPostsType = defineType({
       description: 'Date when the blog post was published.',
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'body',
+      type: 'array',
+      title: 'Body',
+      of: [
+        {
+          type: 'block',
+        },
+        {
+          type: 'image',
+        },
+      ],
+      validation: (Rule) => Rule.required(),
+    }),
   ],
 });
