@@ -53,10 +53,18 @@ export const blogPostsType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      title: 'Published at',
-      description: 'Date when the blog post was published.',
+      name: 'excerpt',
+      type: 'text',
+      title: 'Excerpt',
+      description: 'Short summary of the blog post.',
+      validation: (Rule) => Rule.required().max(200),
+    }),
+    defineField({
+      name: 'category',
+      type: 'reference',
+      title: 'Category',
+      to: [{ type: 'blogCategories' }],
+      description: 'Select the category for this blog post.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -72,6 +80,25 @@ export const blogPostsType = defineType({
         },
       ],
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'publishedAt',
+      type: 'datetime',
+      title: 'Published at',
+      description: 'Date when the blog post was published.',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'tags',
+      type: 'array',
+      title: 'Tags',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'blogTags' }],
+        },
+      ],
+      description: 'Select tags for this blog post.',
     }),
   ],
 });
