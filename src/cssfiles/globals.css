@@ -119,4 +119,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  header,
+  footer,
+  main {
+    @apply max-w-3xl mx-auto;
+  }
 }

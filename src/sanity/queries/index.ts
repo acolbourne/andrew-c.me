@@ -1,10 +1,22 @@
 import { groq } from 'next-sanity';
+import { client } from '../lib/client';
 
-export const allPostsQuery = groq`[_type == 'blogPosts']{
-	_id,
-	title,
-	slug,
-	publishedAt,
-	"author": author->name,
-	"mainImage": mainImage.asset->url
-}`;
+export async function allPostsQuery() {
+  const query = groq`*[_type == "blogPosts"]{
+		_id,
+		title,
+		slug,
+		author -> {
+			name,
+			image
+		},
+		body,
+		mainImage,
+		publishedAt,
+		category[] -> {
+			title
+		}
+	}`;
+  const posts = await client.fetch(query);
+  return posts;
+}

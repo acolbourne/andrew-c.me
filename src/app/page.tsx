@@ -1,15 +1,27 @@
-import { seoMetadata } from '@/utils/seoMetadata';
-import { useTranslations } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
+'use client';
 
-export async function generateMetadata() {
-  const t = await getTranslations();
-  return seoMetadata({
-    title: t('testKey'),
+import { BlogPostListingCard } from '@/components/Cards';
+import { allPostsQuery } from '@/sanity/queries';
+import { useQuery } from '@tanstack/react-query';
+import { BlogPosts } from '../../sanity.types';
+
+export default function Homepage() {
+  const { data, isLoading, isError } = useQuery<BlogPosts[]>({
+    queryKey: ['allPosts'],
+    queryFn: allPostsQuery,
   });
-}
 
-export default function Home() {
-  const t = useTranslations();
-  return <h1>{t('testKey')}</h1>;
+  if (isLoading) return <div>Loading...</div>;
+  if (isError || !data) return <div>Error loading posts</div>;
+
+  console.log('data', data);
+
+  return (
+    <div>
+      <h1>Blog Posts</h1>
+      {data.map((post) => (
+        <BlogPostListingCard key={post._id} {...post} />
+      ))}
+    </div>
+  );
 }
