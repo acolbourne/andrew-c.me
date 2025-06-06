@@ -8,7 +8,12 @@
     "start": "next start",
     "lint": "trunk check",
     "trunk": "trunk",
-    "fmt": "trunk fmt"
+    "fmt": "trunk fmt",
+    "prettier:check": "prettier --check .",
+    "format": "npx eslint src --fix && npx prettier --write src",
+    "type-check": "tsc --noEmit",
+    "prepare": "husky",
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
     "@arcjet/next": "1.0.0-beta.8",
@@ -25,7 +30,13 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,md,mdx}": "prettier --write",
+    "src/**/*.{js,jsx,ts,tsx}": "eslint --fix"
   }
 }
