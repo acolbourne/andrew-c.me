@@ -1,5 +1,5 @@
+import '@/cssfiles/globals.css';
 import type { Metadata } from 'next';
-import './globals.css';
 import { geistMono, geistSans } from './typography';
 
 export const metadata: Metadata = {

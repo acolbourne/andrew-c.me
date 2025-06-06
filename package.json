@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@rushstack/eslint-patch": "^1.11.0",
     "@tailwindcss/postcss": "^4",
     "@trunkio/launcher": "^1.3.4",
     "@types/node": "^20",
